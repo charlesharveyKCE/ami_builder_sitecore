@@ -4,7 +4,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - curl -qL -o packer.zip https://releases.hashicorp.com/packer/1.2.3/packer_1.2.3_linux_amd64.zip && unzip packer.zip
+      - curl -qL -o packer.zip https://releases.hashicorp.com/packer/1.3.1/packer_1.3.1_linux_amd64.zip && unzip packer.zip
       - curl -qL -o jq https://stedolan.github.io/jq/download/linux64/jq && chmod +x ./jq
       - ./packer validate "windows_packer-template.json"
   build:
@@ -14,7 +14,6 @@ phases:
       - aws configure set aws_access_key_id `./jq -r '.AccessKeyId' aws_credentials.json`
       - aws configure set aws_secret_access_key `./jq -r '.SecretAccessKey' aws_credentials.json`
       - aws configure set aws_session_token `./jq -r '.Token' aws_credentials.json`
-      - export PACKER_LOG=1
       - ./packer build "windows_packer-template.json"
   post_build:
     commands:
