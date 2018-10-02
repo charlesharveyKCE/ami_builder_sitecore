@@ -1,9 +1,9 @@
 #
 # Author:: Seth Chisamore (<schisamo@chef.io>)
-# Cookbook:: iis
+# Cookbook Name:: iis
 # Recipe:: default
 #
-# Copyright:: 2011-2016, Chef Software, Inc.
+# Copyright 2011, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,15 +21,14 @@
 # Always add this, so that we don't require this to be added if we want to add other components
 default = Opscode::IIS::Helper.older_than_windows2008r2? ? 'Web-Server' : 'IIS-WebServerRole'
 
-([default] + node['iis']['components']).each do |feature|
+(node['iis']['components'] + [default]).each do |feature|
   windows_feature feature do
     action :install
-    all !Opscode::IIS::Helper.older_than_windows2012?
-    source node['iis']['source'] unless node['iis']['source'].nil?
+    all (!Opscode::IIS::Helper.older_than_windows2012?)
   end
 end
 
-service 'iis' do
-  service_name 'W3SVC'
+service "iis" do
+  service_name "W3SVC"
   action [:enable, :start]
 end

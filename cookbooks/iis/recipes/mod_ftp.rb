@@ -1,9 +1,9 @@
 #
 # Author:: Kevin Rivers (<kevin@kevinrivers.com>)
-# Cookbook:: iis
+# Cookbook Name:: iis
 # Recipe:: mod_ftp
 #
-# Copyright:: 2014-2016, Kevin Rivers
+# Copyright 2014, Kevin Rivers
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,13 +18,13 @@
 # limitations under the License.
 #
 
-include_recipe 'iis'
+include_recipe "iis"
 
-features = if Opscode::IIS::Helper.older_than_windows2008r2?
-             %w(Web-Ftp-Server Web-Ftp-Service Web-Ftp-Ext)
-           else
-             %w(IIS-FTPServer IIS-FTPSvc IIS-FTPExtensibility)
-           end
+if Opscode::IIS::Helper.older_than_windows2008r2?
+  features = %w{Web-Ftp-Server Web-Ftp-Service Web-Ftp-Ext}
+else
+  features = %w{IIS-FTPServer IIS-FTPSvc IIS-FTPExtensibility}
+end
 
 features.each do |f|
   windows_feature f do

@@ -1,9 +1,9 @@
 #
 # Author:: Kendrick Martin (<kendrick.martin@webtrends.com>)
-# Cookbook:: iis
+# Cookbook Name:: iis
 # Recipe:: remove_default_site
 #
-# Copyright:: 2012-2016, Webtrends, Inc.
+# Copyright 2012, Webtrends, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,5 +23,5 @@ iis_site 'Default Web Site' do
 end
 
 iis_pool 'DefaultAppPool' do
-  action [:stop, :delete]
+  action [:stop , :delete]
 end

@@ -1,9 +1,9 @@
 #
 # Author:: Justin Schuhmann
-# Cookbook:: iis
+# Cookbook Name:: iis
 # Recipe:: mod_auth_basic
 #
-# Copyright:: 2016, Justin Schuhmann
+# Copyright:: Justin Schuhmann
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
 # limitations under the License.
 #
 
-include_recipe 'iis'
+include_recipe "iis"
 
 iis_section 'unlocks anonymous authentication control in web.config' do
-  section 'system.webServer/security/authentication/anonymousAuthentication'
+  section "system.webServer/security/authentication/anonymousAuthentication"
   action :unlock
 end

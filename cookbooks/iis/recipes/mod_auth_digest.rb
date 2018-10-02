@@ -1,9 +1,9 @@
 #
 # Author:: Justin Schuhmann
-# Cookbook:: iis
+# Cookbook Name:: iis
 # Recipe:: mod_auth_basic
 #
-# Copyright:: 2016, Justin Schuhmann
+# Copyright:: Justin Schuhmann
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,19 +18,19 @@
 # limitations under the License.
 #
 
-include_recipe 'iis'
+include_recipe "iis"
 
-feature = if Opscode::IIS::Helper.older_than_windows2008r2?
-            'Web-Digest-Auth'
-          else
-            'IIS-DigestAuthentication'
-          end
+if Opscode::IIS::Helper.older_than_windows2008r2?
+  feature = 'Web-Digest-Auth'
+else
+  feature = 'IIS-DigestAuthentication'
+end
 
 windows_feature feature do
   action :install
 end
 
 iis_section 'unlocks digest authentication control in web.config' do
-  section 'system.webServer/security/authentication/digestAuthentication'
+  section "system.webServer/security/authentication/digestAuthentication"
   action :unlock
 end

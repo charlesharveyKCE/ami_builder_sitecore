@@ -1,9 +1,9 @@
 #
 # Author:: Richard Downer (<richard.downer@cloudsoftcorp.com>)
-# Cookbook:: iis
+# Cookbook Name:: iis
 # Recipe:: mod_cgi
 #
-# Copyright:: 2013-2016, Cloudsoft Corporation
+# Copyright 2013, Cloudsoft Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,13 +18,14 @@
 # limitations under the License.
 #
 
-include_recipe 'iis'
+include_recipe "iis"
 
-feature = if Opscode::IIS::Helper.older_than_windows2008r2?
-            'Web-CGI'
-          else
-            'IIS-CGI'
-          end
+
+if Opscode::IIS::Helper.older_than_windows2008r2?
+  feature = 'Web-CGI'
+else
+  feature = 'IIS-CGI'
+end
 
 windows_feature feature do
   action :install
