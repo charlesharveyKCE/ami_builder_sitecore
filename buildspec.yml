@@ -1,10 +1,10 @@
 ---
 version: 0.2
-env:
-  variables:
-    role: "sitecore_cms"
-    osver: "2016_full"
-  
+#env:
+#  variables:
+#    role: "sitecore_cms"
+#    osver: "2016_full"
+ 
 
 phases:
   pre_build:
@@ -22,7 +22,7 @@ phases:
       - export PACKER_LOG=1
       - printenv osver
       - printenv role
-      - ./packer build -var "role=$role" -only=awsami_$osver "windows_packer-template.json"
+      - ./packer build "windows_packer-template.json"
   post_build:
     commands:
       - echo "HashiCorp Packer build completed on `date`"

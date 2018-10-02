@@ -6,20 +6,6 @@
         "osver" : "{{env `osver` }}"
     },
     "builders": [{
-        "name": "awsami_windows2016core",
-        "type": "amazon-ebs",
-        "user_data_file": "./scripts/setup_winrm.ps1",
-        "region": "{{user `aws_region`}}",
-        "instance_type": "t2.micro",
-        "winrm_username": "Administrator",
-        "ami_name": "{{ user `role` }}_win2016_core_{{isotime \"2006_01_02_03_04_05\"}}",
-        "associate_public_ip_address" : true,
-        "communicator":"winrm",
-        "winrm_use_ssl": true,
-        "winrm_insecure": true,
-        "source_ami" : "ami-13ddac6b" 
-    },
-    {
         "name": "awsami_windows2016full",
         "type": "amazon-ebs",
         "user_data_file": "./scripts/setup_winrm.ps1",
@@ -32,37 +18,7 @@
         "winrm_use_ssl": true,
         "winrm_insecure": true,
         "source_ami" : "ami-f3dcbc8b" 
-    },
-    {
-        "name": "vmware_iso_windows2016full",
-        "type": "vmware-iso",
-        "remote_type": "esx5",
-        "remote_host": "",
-        "remote_port":"",
-        "remote_datastore":"",
-        "remote_cache_datastore":"",
-        "remote_cache_directory":"",
-        "remote_username":"",
-        "remote_password":"",
-        "remote_private_key_file":"",
-        "format":"vmx",
-        "iso_url": "",
-        "iso_checksum": "",
-        "iso_checksum_type": "md5",
-        "winrm_username": "Administrator",
-        "winrm_password": "uEU4SwsvJfhAxM7Y",
-        "shutdown_command": "shutdown -P now",
-        "floppy_files": [
-            "./answer_files/windows2016full/autounattend.xml"
-            ],
-        "vmx_data": {
-            "memsize": 4096,
-            "numvcpus": 2,
-            "scsi0.virtualDev": "lsisas1068"
-            }
     }
-    
-    
     ],
     "provisioners": [
         {
