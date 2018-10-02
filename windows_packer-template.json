@@ -6,7 +6,6 @@
         "osver" : "{{env `osver` }}"
     },
     "builders": [{
-        "name": "awsami_windows2016full",
         "type": "amazon-ebs",
         "user_data_file": "./scripts/setup_winrm.ps1",
         "region": "{{user `aws_region`}}",
