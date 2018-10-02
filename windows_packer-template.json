@@ -12,7 +12,7 @@
         "instance_type": "t3.small",
         "winrm_username": "Administrator",
         "ami_name": "{{ user `role` }}_win2016_full_{{isotime \"2006_01_02_03_04_05\"}}",
-        "associate_public_ip_address" : true,
+        "associate_public_ip_address" : false,
         "communicator":"winrm",
         "winrm_use_ssl": true,
         "winrm_insecure": true,
