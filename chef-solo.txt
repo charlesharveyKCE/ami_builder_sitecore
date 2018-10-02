@@ -1,0 +1,8 @@
+ {
+            "type": "chef-solo",
+            "cookbook_paths": ["cookbooks"],
+            "roles_path" : "roles",
+            "guest_os_type": "windows",
+            "run_list": ["role[{{ user `role` }}]"]
+        },
+      
