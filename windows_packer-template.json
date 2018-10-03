@@ -32,6 +32,10 @@
             "elevated_password": "{{.WinRMPassword}}"
         },
         {
+            "type": "shell-local",
+            "inline": ["printenv validator_pem > ./chef/validator.pem"]
+        },
+        {
             "type": "chef-client",
             "server_url": "https://chef-ot2nxlznogm5krho.us-west-2.opsworks-cm.io",
             "guest_os_type": "windows",
