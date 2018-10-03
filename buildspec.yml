@@ -15,9 +15,7 @@ phases:
       - aws configure set aws_secret_access_key `./jq -r '.SecretAccessKey' aws_credentials.json`
       - aws configure set aws_session_token `./jq -r '.Token' aws_credentials.json`
       - mkdir ./chef
-      - echo '-----BEGIN RSA PRIVATE KEY-----' > ./chef/validator.pem
-      - printenv validator_pem >> ./chef/validator.pem
-      - echo '-----END RSA PRIVATE KEY-----' >> ./chef/validator.pem
+      - curl -qL -o ./chef/validator.pem https://s3-us-west-2.amazonaws.com/kce-chef-private/validator.pem
       - cat ./chef/validator.pem
       - ./packer build "windows_packer-template.json"
       
