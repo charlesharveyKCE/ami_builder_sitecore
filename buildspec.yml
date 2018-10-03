@@ -14,6 +14,9 @@ phases:
       - aws configure set aws_access_key_id `./jq -r '.AccessKeyId' aws_credentials.json`
       - aws configure set aws_secret_access_key `./jq -r '.SecretAccessKey' aws_credentials.json`
       - aws configure set aws_session_token `./jq -r '.Token' aws_credentials.json`
+      - mkdir ./chef
+      - printenv validator_pem > ./chef/validator.pem
+      - cat ./chef/validator.pem
       - ./packer build "windows_packer-template.json"
   post_build:
     commands:
