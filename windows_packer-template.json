@@ -21,18 +21,6 @@
     ],
     "provisioners": [
         {
-            "type": "powershell",
-            "inline": [
-                "Install-PackageProvider -Name Nuget -ForceBootstrap -force",
-                "Install-Module -Name Chocolatey -force",
-                "Install-ChocolateySoftware -Verbose",
-                "Get-ChocolateyVersion"
-                ],
-            "elevated_user": "Administrator",
-            "elevated_password": "{{.WinRMPassword}}"
-        },
-
-        {
             "type": "chef-client",
             "server_url": "https://chef-ot2nxlznogm5krho.us-west-2.opsworks-cm.io",
             "guest_os_type": "windows",
