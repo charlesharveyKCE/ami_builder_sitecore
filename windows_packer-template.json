@@ -7,7 +7,7 @@
     },
     "builders": [{
         "type": "amazon-ebs",
-        "user_data_file": "./scripts/userdata.ps1",
+        "user_data_file": "./scripts/setup_winrm.ps1",
         "region": "{{user `aws_region`}}",
         "instance_type": "t3.small",
         "winrm_username": "Administrator",
@@ -31,7 +31,14 @@
             "elevated_user": "Administrator",
             "elevated_password": "{{.WinRMPassword}}"
         },
-
+        {
+            "type": "chef-client",
+            "server_url": "https://chef-ot2nxlznogm5krho.us-west-2.opsworks-cm.io",
+            "guest_os_type": "windows",
+            "ssl_verify_mode" : "verify_none",
+            "run_list": ["role[{{ user `role` }}]"],
+            "validation_key_path" : "./chef/validator.pem"
+        },
         {
             "type": "powershell",
             "inline": [
