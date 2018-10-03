@@ -1,0 +1,7 @@
+        {
+            "type": "chef-client",
+            "server_url": "https://chef-ot2nxlznogm5krho.us-west-2.opsworks-cm.io",
+            "guest_os_type": "windows",
+            "ssl_verify_mode" : "verify_none",
+            "run_list": ["role[{{ user `role` }}]"]
+        },
