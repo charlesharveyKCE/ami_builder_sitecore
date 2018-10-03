@@ -20,6 +20,7 @@ phases:
       - echo '-----END RSA PRIVATE KEY-----' >> ./chef/validator.pem
       - cat ./chef/validator.pem
       - ./packer build "windows_packer-template.json"
+      
   post_build:
     commands:
       - echo "HashiCorp Packer build completed on `date`"
