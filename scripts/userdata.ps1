@@ -1,16 +1,4 @@
 <powershell>
- $env:CHEF_SERVER_NAME = "chef" # Name of your Chef Server
- $env:CHEF_SERVER_ENDPOINT = "chef-ot2nxlznogm5krho.us-west-2.opsworks-cm.io" # FQDN of your Chef Server
- $env:REGION = "us-west-2" # Region of your Chef Server (choose one of our supported regions - us-east-1, us-east-2, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-northeast-1, ap-southeast-1, ap-southeast-2)
- $env:CHEF_NODE_NAME = "$(Invoke-WebRequest -uri 'http://169.254.169.254/latest/meta-data/instance-id' -usebasicparsing)" # Use EC2 Instance ID as Chef Node Name
- $env:CHEF_ORGANIZATION = "default" # AWS OpsWorks for Chef Server always creates the organization "default"
- $env:CHEF_NODE_ENVIRONMENT = "" # E.g. development, staging, onebox...
- $env:CHEF_CLIENT_VERSION = "13.8.5" # Latest, if left empty
- $env:CHEF_RUN_LIST="" 
- $env:CHEF_FOLDER = "C:\chef"
- $env:CHEF_CA_PATH = "c:\chef\opsworks-cm-ca-2016-root.pem"
- $env:CLIENT_KEY = "$env:CHEF_FOLDER\client.pem"
- 
 write-output "Running User Data Script"
 write-host "(host) Running User Data Script"
 Set-ExecutionPolicy Unrestricted -Scope LocalMachine -Force -ErrorAction Ignore
@@ -43,7 +31,17 @@ cmd.exe /c net stop winrm
 cmd.exe /c sc config winrm start= auto
 cmd.exe /c net start winrm
 
-
+ $env:CHEF_SERVER_NAME = "chef" # Name of your Chef Server
+ $env:CHEF_SERVER_ENDPOINT = "chef-ot2nxlznogm5krho.us-west-2.opsworks-cm.io" # FQDN of your Chef Server
+ $env:REGION = "us-west-2" # Region of your Chef Server (choose one of our supported regions - us-east-1, us-east-2, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-northeast-1, ap-southeast-1, ap-southeast-2)
+ $env:CHEF_NODE_NAME = "$(Invoke-WebRequest -uri 'http://169.254.169.254/latest/meta-data/instance-id' -usebasicparsing)" # Use EC2 Instance ID as Chef Node Name
+ $env:CHEF_ORGANIZATION = "default" # AWS OpsWorks for Chef Server always creates the organization "default"
+ $env:CHEF_NODE_ENVIRONMENT = "" # E.g. development, staging, onebox...
+ $env:CHEF_CLIENT_VERSION = "13.8.5" # Latest, if left empty
+ $env:CHEF_RUN_LIST="recipe[chef-client]" # Use this role when following the starter kit example or specify recipes like recipe[chef-client],recipe[apache2] etc.
+ $env:CHEF_FOLDER = "C:\chef"
+ $env:CHEF_CA_PATH = "c:\chef\opsworks-cm-ca-2016-root.pem"
+ $env:CLIENT_KEY = "$env:CHEF_FOLDER\client.pem"
 
  function download_with_retries {
      $stop_try = $false
